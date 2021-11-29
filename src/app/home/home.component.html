@@ -1,3 +1,20 @@
-<p>home works!</p>
+<div class="row row-cols-1 row-cols-md-4">
+  <div class="col mx-0 px-0" *ngFor="let section of sections">
+    <div class="card bg-transparent border-bottom-0 border-start-0">
+      <div class="card-title text-center mt-3">
+        <h5>{{ section }}</h5>
+      </div>
+      <hr class="mx-3 my-0" />
+      <div class="card-body px-5">
+        <app-editable-task [editing]="section !== 'New'"></app-editable-task>
+      </div>
 
-<app-section-kanban></app-section-kanban>
+      <!-- <div class="card-body">
+          <p class="card-text">
+            This is a wider card with supporting text below as a natural lead-in to
+            additional content. This content is a little bit longer.
+          </p>
+        </div> -->
+    </div>
+  </div>
+</div>

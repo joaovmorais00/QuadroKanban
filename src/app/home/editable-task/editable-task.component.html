@@ -1,0 +1,19 @@
+<div class="card bg-white">
+  <div class="card-body">
+    <input type="text" class="form-control" id="title" placeholder="Título" />
+    <textarea
+      class="form-control"
+      id="textArea"
+      rows="3"
+      placeholder="Conteúdo"
+    ></textarea>
+  </div>
+  <a class="btn m-0 p-0" *ngIf="!editing"
+    ><fa-icon [icon]="faPlusCircle" class="fs-4 plusIcon"></fa-icon>
+  </a>
+
+  <div class="d-flex justify-content-between px-3" *ngIf="editing">
+    <fa-icon [icon]="faBan" class="fs-4"></fa-icon
+    ><fa-icon [icon]="faSave" class="fs-4"></fa-icon>
+  </div>
+</div>
