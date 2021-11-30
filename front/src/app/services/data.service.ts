@@ -44,10 +44,19 @@ export class DataService {
 
   deleteTask(id: string) {
     const headers = this.setToken();
-    const url = `${this.baseCards}${id}`;
-    console.log(url, 'delete');
     return this.http.delete<Task>(`${this.baseCards}${id}`, {
       headers: headers,
     });
+  }
+
+  editTask(task: Task) {
+    const headers = this.setToken();
+    return this.http.put<Task>(
+      `${this.baseCards}${task.id}`,
+      { ...task },
+      {
+        headers: headers,
+      }
+    );
   }
 }

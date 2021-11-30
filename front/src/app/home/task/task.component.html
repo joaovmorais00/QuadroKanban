@@ -6,7 +6,7 @@
           <h6>{{ task.titulo }}</h6>
         </div>
         <div class="col-1 mx-0 px-0">
-          <a class="btn m-0 p-0"
+          <a class="btn m-0 p-0" (click)="editing = true"
             ><fa-icon [icon]="faEdit" class="fs-4"></fa-icon
           ></a>
         </div>
@@ -38,5 +38,8 @@
 </div>
 
 <ng-template #Editing>
-  <app-editable-task [id]="task.id"></app-editable-task>
+  <app-editable-task
+    [task]="task"
+    (fechaEdicao)="editing = false"
+  ></app-editable-task>
 </ng-template>

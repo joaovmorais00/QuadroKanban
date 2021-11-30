@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { faPlusCircle, faBan, faSave } from '@fortawesome/free-solid-svg-icons';
+import { Task } from 'src/app/models/task.model';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class EditableTaskComponent implements OnInit {
   faBan = faBan;
   faSave = faSave;
   @Input() editing: Boolean = true;
-  @Input() id!: string;
+  @Input() task!: Task;
+
+  @Output() fechaEdicao = new EventEmitter();
 
   dadosTask = new FormGroup({
     titulo: new FormControl(''),
@@ -23,7 +26,12 @@ export class EditableTaskComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    console.log('crindo');
+    if (this.editing) {
+      this.dadosTask.setValue({
+        titulo: this.task.titulo,
+        conteudo: this.task.conteudo,
+      });
+    }
   }
 
   enviaTask() {
@@ -32,9 +40,15 @@ export class EditableTaskComponent implements OnInit {
         .createTask(this.dadosTask.value.titulo, this.dadosTask.value.conteudo)
         .subscribe((response) => {
           this.dadosTask.setValue({ titulo: '', conteudo: '' });
-          // this.dadosTask.value.conteudo = '';
           this.dataService.tasksChanged.next(response);
         });
+    } else {
+      this.task.titulo = this.dadosTask.value.titulo;
+      this.task.conteudo = this.dadosTask.value.conteudo;
+      this.dataService.editTask(this.task).subscribe((response) => {
+        this.fechaEdicao.emit();
+        this.dataService.tasksChanged.next(response);
+      });
     }
   }
 }
