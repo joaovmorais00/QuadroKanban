@@ -16,6 +16,12 @@
               *ngFor="let task of section.tasks"
               [task]="task"
               [index]="index"
+              [nextSection]="
+                sections[index + 1] ? sections[index + 1].name : ''
+              "
+              [prevSection]="
+                sections[index - 1] ? sections[index - 1].name : ''
+              "
             ></app-task>
           </div>
         </ng-template>

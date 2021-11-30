@@ -21,19 +21,39 @@ export class TaskComponent implements OnInit {
 
   @Input() task!: Task;
   @Input() index!: number;
-  @Input() nameSection!: string;
+  @Input() nextSection!: string;
+  @Input() prevSection!: string;
 
   editing: Boolean = false;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    console.log('index', this.index, this.nameSection);
+    console.log('index', this.index, this.nextSection);
   }
 
   deleteTask() {
     this.dataService.deleteTask(this.task.id).subscribe((response) => {
       this.dataService.tasksChanged.next(response);
     });
+  }
+
+  alteraSection(direction: number) {
+    console.log('tochamadno');
+    if (direction === 1) {
+      if (this.index !== 1) {
+        this.task.lista = this.prevSection;
+        this.dataService.editTask(this.task).subscribe((response) => {
+          this.dataService.tasksChanged.next(response);
+        });
+      }
+    } else {
+      if (this.index !== 3) {
+        this.task.lista = this.nextSection;
+        this.dataService.editTask(this.task).subscribe((response) => {
+          this.dataService.tasksChanged.next(response);
+        });
+      }
+    }
   }
 }
