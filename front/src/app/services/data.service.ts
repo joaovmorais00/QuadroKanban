@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Task } from '../models/task.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   private baseUrl = 'http://localhost:5000/';
-  private baseCards = this.baseUrl + 'cards';
+  private baseCards = this.baseUrl + 'cards/';
+
   constructor(private http: HttpClient) {}
+
+  tasksChanged = new Subject();
 
   setToken() {
     return new HttpHeaders().set(
@@ -27,14 +31,23 @@ export class DataService {
     return this.http.get<Task[]>(this.baseCards, { headers: headers });
   }
 
-  createTask(login: string, senha: string, lista: string) {
+  createTask(login: string, senha: string) {
     const headers = this.setToken();
     return this.http.post<Task>(
       this.baseCards,
-      { login: login, senha: senha, lista: lista },
+      { titulo: login, conteudo: senha, lista: 'To Do' },
       {
         headers: headers,
       }
     );
+  }
+
+  deleteTask(id: string) {
+    const headers = this.setToken();
+    const url = `${this.baseCards}${id}`;
+    console.log(url, 'delete');
+    return this.http.delete<Task>(`${this.baseCards}${id}`, {
+      headers: headers,
+    });
   }
 }

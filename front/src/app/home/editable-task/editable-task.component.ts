@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { faPlusCircle, faBan, faSave } from '@fortawesome/free-solid-svg-icons';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-editable-task',
@@ -19,11 +20,21 @@ export class EditableTaskComponent implements OnInit {
     conteudo: new FormControl(''),
   });
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     console.log('crindo');
   }
 
-  enviaTask() {}
+  enviaTask() {
+    if (!this.editing) {
+      this.dataService
+        .createTask(this.dadosTask.value.titulo, this.dadosTask.value.conteudo)
+        .subscribe((response) => {
+          this.dadosTask.setValue({ titulo: '', conteudo: '' });
+          // this.dadosTask.value.conteudo = '';
+          this.dataService.tasksChanged.next(response);
+        });
+    }
+  }
 }

@@ -6,6 +6,7 @@ import {
   faEdit,
 } from '@fortawesome/free-solid-svg-icons';
 import { Task } from 'src/app/models/task.model';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-task',
@@ -24,9 +25,15 @@ export class TaskComponent implements OnInit {
 
   editing: Boolean = false;
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     console.log('index', this.index, this.nameSection);
+  }
+
+  deleteTask() {
+    this.dataService.deleteTask(this.task.id).subscribe((response) => {
+      this.dataService.tasksChanged.next(response);
+    });
   }
 }
