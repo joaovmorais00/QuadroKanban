@@ -5,3 +5,19 @@ body {
   text-align: center;
   background-color: #d9d9d9;
 }
+
+.colorGreen {
+  color: #146b43;
+}
+
+.colorRed {
+  color: #bb1200;
+}
+
+.colorBlue {
+  color: #20169b;
+}
+
+.text-justify {
+  text-align: justify;
+}
