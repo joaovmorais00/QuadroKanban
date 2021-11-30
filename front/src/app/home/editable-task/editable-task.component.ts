@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { faPlusCircle, faBan, faSave } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,9 +11,19 @@ export class EditableTaskComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faBan = faBan;
   faSave = faSave;
-  @Input() editing: Boolean = false;
+  @Input() editing: Boolean = true;
+  @Input() id!: string;
+
+  dadosTask = new FormGroup({
+    titulo: new FormControl(''),
+    conteudo: new FormControl(''),
+  });
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('crindo');
+  }
+
+  enviaTask() {}
 }

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   faChevronCircleLeft,
   faChevronCircleRight,
   faTrash,
   faEdit,
 } from '@fortawesome/free-solid-svg-icons';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-task',
@@ -17,7 +18,15 @@ export class TaskComponent implements OnInit {
   faTrash = faTrash;
   faEdit = faEdit;
 
+  @Input() task!: Task;
+  @Input() index!: number;
+  @Input() nameSection!: string;
+
+  editing: Boolean = false;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('index', this.index, this.nameSection);
+  }
 }

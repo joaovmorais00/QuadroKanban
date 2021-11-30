@@ -1,8 +1,10 @@
-<div class="card bg-white mb-2">
+<div class="card bg-white mb-2" *ngIf="!editing; else Editing">
   <div class="card-body">
     <div class="container">
       <div class="row">
-        <div class="col-11 mx-0 pt-2"><h6>Testando</h6></div>
+        <div class="col-11 mx-0 pt-2">
+          <h6>{{ task.titulo }}</h6>
+        </div>
         <div class="col-1 mx-0 px-0">
           <a class="btn m-0 p-0"
             ><fa-icon [icon]="faEdit" class="fs-4"></fa-icon
@@ -13,23 +15,28 @@
 
     <hr class="mx-1 my-0" />
     <p class="px-1 pt-2 text-justify">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nisl
+      <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nisl
       sodales, tempor nibh vel, egestas libero. Nullam non magna erat. Interdum
       et malesuada fames ac ante ipsum primis in faucibus. Mauris rhoncus eu
       metus ac imperdiet. Phasellus eu mattis nibh. Sed dictum erat ultricies
       ligula luctus accumsan. Curabitur vitae tincidunt justo, posuere sagittis
-      orci.
+      orci. -->
+      {{ task.conteudo }}
     </p>
   </div>
   <div class="d-flex justify-content-between px-4">
-    <a class="btn m-0 p-0"
-      ><fa-icon [icon]="faChevronLeft" class="fs-4"></fa-icon
-    ></a>
-    <a class="btn m-0 p-0"
-      ><fa-icon [icon]="faTrash" class="fs-4 colorRed"></fa-icon
-    ></a>
-    <a class="btn m-0 p-0"
-      ><fa-icon [icon]="faChevronRight" class="fs-4"></fa-icon
-    ></a>
+    <button class="btn m-0 p-0" type="button" [disabled]="index === 1">
+      <fa-icon [icon]="faChevronLeft" class="fs-4"></fa-icon>
+    </button>
+    <button class="btn m-0 p-0">
+      <fa-icon [icon]="faTrash" class="fs-4 colorRed"></fa-icon>
+    </button>
+    <button class="btn m-0 p-0" type="button" [disabled]="index === 4">
+      <fa-icon [icon]="faChevronRight" class="fs-4"></fa-icon>
+    </button>
   </div>
 </div>
+
+<ng-template #Editing>
+  <app-editable-task [id]="task.id"></app-editable-task>
+</ng-template>

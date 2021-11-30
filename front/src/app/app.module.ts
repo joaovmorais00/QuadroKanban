@@ -9,6 +9,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskComponent } from './home/task/task.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ViewTaskComponent } from './home/task/view-task/view-task.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,15 @@ import { LoginComponent } from './login/login.component';
     EditableTaskComponent,
     TaskComponent,
     LoginComponent,
+    ViewTaskComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
