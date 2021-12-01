@@ -20,7 +20,10 @@
       </button>
 
       <div class="d-flex justify-content-between px-1" *ngIf="editing">
-        <button class="btn m-0 p-0" (click)="fechaEdicao.emit()">
+        <button
+          class="btn m-0 p-0"
+          (click)="this.dadosTask.setValue({ titulo: '', conteudo: '' })"
+        >
           <fa-icon [icon]="faBan" class="fs-4 colorRed"></fa-icon>
         </button>
         <button type="submit" class="btn m-0 p-0">

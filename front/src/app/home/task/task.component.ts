@@ -39,7 +39,6 @@ export class TaskComponent implements OnInit {
   }
 
   alteraSection(direction: number) {
-    console.log('tochamadno');
     if (direction === 1) {
       if (this.index !== 1) {
         this.task.lista = this.prevSection;
